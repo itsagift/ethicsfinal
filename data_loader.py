@@ -34,6 +34,11 @@ def get_geo_data():
     nbh_data = nbh_data.to_crs(epsg=3857)
     
     return (car_data, nbh_data)
+def get_live_data():
+    livefeed_json = requests.get(url="https://gbfs.citibikenyc.com/gbfs/en/station_status.json")
+    livefeed_data = livefeed_json.json()
+    items_df = pd.DataFrame(livefeed_data['data']['stations'])
+    return items_df
 
 def get_citibike_data():
     # get live data from citibike json
